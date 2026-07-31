@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { config } from "../config.js";
 import {
   acharUsuarioPorEmail,
   assinarToken,
@@ -37,7 +38,23 @@ rotasAuth.post("/login", async (req, res) => {
 
   limparFalhas(chave);
   definirCookie(res, assinarToken(usuario));
-  res.json({ usuario: publico(usuario), senhaPadrao: !!usuario.senhaPadrao });
+
+  // Em produção o cookie sai como "Secure": o navegador o descarta se a conexão for HTTP.
+  // O sintoma é a senha ser aceita e a tela de login voltar — sem nenhum erro visível.
+  if (config.producao && !req.secure) {
+    console.warn(
+      "\n[AEUMA] ATENÇÃO: login por HTTP com NODE_ENV=production.\n" +
+        "        O cookie de sessão é Secure e o navegador vai descartá-lo — ninguém consegue entrar.\n" +
+        "        Instale o HTTPS, ou use NODE_ENV=development enquanto testa pelo IP.\n"
+    );
+  }
+
+  res.json({
+    usuario: publico(usuario),
+    senhaPadrao: !!usuario.senhaPadrao,
+    // o painel usa isto para explicar o problema em vez de só voltar para o login
+    avisoHttp: config.producao && !req.secure,
+  });
 });
 
 rotasAuth.post("/logout", (_req, res) => {

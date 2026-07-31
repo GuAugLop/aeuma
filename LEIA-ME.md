@@ -191,12 +191,16 @@ Oito tentativas erradas por IP + e-mail bloqueiam o login por 15 minutos.
 
 ## Antes de publicar em produção
 
+O passo a passo completo da VPS (Node, systemd, nginx, HTTPS e backup) está em
+**[IMPLANTACAO.md](IMPLANTACAO.md)**. Em resumo:
+
 1. `cp .env.example .env` e preencha:
    - **`JWT_SEGREDO`** — obrigatório; sem ele o servidor não sobe com `NODE_ENV=production`.
      Gere com `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"`.
    - `ADMIN_EMAIL` / `ADMIN_SENHA` — usados só na criação da primeira conta.
 2. `NODE_ENV=production` — passa a exigir HTTPS no cookie de sessão.
-3. Sirva atrás de HTTPS (nginx ou Caddy como proxy reverso para a porta 3000).
+3. Sirva atrás de HTTPS (nginx ou Caddy como proxy reverso para a porta 3000), com
+   `client_max_body_size` maior que o `UPLOAD_MAX_MB`.
 4. Faça backup de `data/` — é onde estão o banco e todos os arquivos.
 5. Troque a senha padrão do administrador no primeiro acesso.
 

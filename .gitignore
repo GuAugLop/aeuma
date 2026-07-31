@@ -6,8 +6,10 @@ node_modules/
 data/db.json
 data/db.json.tmp
 data/.segredo-dev
-data/uploads/**/*
-!data/uploads/**/.gitkeep
+# Um só asterisco em cada nível: "data/uploads/**/*" casaria também com as pastas,
+# e o git não entra em pasta ignorada — os .gitkeep nunca seriam versionados.
+data/uploads/*/*
+!data/uploads/*/.gitkeep
 
 # Python
 __pycache__/

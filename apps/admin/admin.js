@@ -129,7 +129,18 @@ window.AEUMA = (function () {
       botao.disabled = true;
       botao.textContent = "Entrando…";
       pedir("/auth/login", { method: "POST", json: { email: email, senha: senha } })
-        .then(function () { location.replace("/admin/painel"); })
+        .then(function (dados) {
+          // Sem HTTPS o navegador descarta o cookie e o painel devolveria para cá,
+          // sem explicação nenhuma. Melhor dizer o que está acontecendo.
+          if (dados.avisoHttp) {
+            botao.disabled = false;
+            botao.textContent = "Entrar";
+            return mostrarErro(erro,
+              "Senha correta, mas esta conexão é HTTP e o cookie de sessão exige HTTPS. " +
+              "Instale o certificado no domínio, ou use NODE_ENV=development enquanto testa pelo IP.");
+          }
+          location.replace("/admin/painel");
+        })
         .catch(function (e) {
           mostrarErro(erro, e.message);
           botao.disabled = false;
