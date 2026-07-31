@@ -216,8 +216,11 @@ Entre em `https://seudominio/admin/`, faça login e troque a senha na aba **Cont
 cd /var/www/aeuma
 git pull
 npm ci --omit=dev
+sudo chown -R www-data:www-data data     # o git roda como root e pode trocar o dono
 sudo systemctl restart aeuma
 ```
+
+O `chown` não é opcional: sem ele o envio de arquivos passa a falhar com `EACCES`.
 
 ### Criar contas para outras pessoas
 
@@ -272,5 +275,5 @@ sudo journalctl -u aeuma -n 30 --no-pager | grep "modo"
 | `413 Request Entity Too Large` ao enviar PDF | `client_max_body_size` no nginx |
 | Serviço não sobe, log fala em `JWT_SEGREDO` | Variável ausente no `.env` |
 | `EADDRINUSE` na porta 3000 | Outra instância rodando — `sudo systemctl stop aeuma` |
-| Erro de permissão ao publicar arquivo | `data/` não pertence ao `www-data` (passo 6) |
+| `EACCES` ou "permissão negada" ao publicar arquivo | `data/` não pertence ao `www-data` — comum depois de um `git pull` feito como root |
 | Páginas abrem mas as listas ficam vazias com aviso | O Node caiu; veja `journalctl -u aeuma` |

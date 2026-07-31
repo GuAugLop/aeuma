@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(rm -f data/db.json)",
-      "Bash(rm -f data/uploads/calculos/* data/uploads/transparencia/*)"
-    ]
-  }
-}
