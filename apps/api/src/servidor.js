@@ -80,7 +80,13 @@ app.use((erro, _req, res, _next) => {
 });
 
 const servidor = app.listen(config.porta, () => {
-  console.log(`\n[AEUMA] site      → http://localhost:${config.porta}/`);
+  console.log(
+    `\n[AEUMA] modo      → ${config.producao ? "production" : "development"}` +
+      (config.producao
+        ? " (cookie de sessão só trafega por HTTPS)"
+        : " (cookie de sessão aceita HTTP — não use assim em produção)")
+  );
+  console.log(`[AEUMA] site      → http://localhost:${config.porta}/`);
   console.log(`[AEUMA] painel    → http://localhost:${config.porta}/admin/`);
   console.log(`[AEUMA] api       → http://localhost:${config.porta}/api/publico/resumo`);
   console.log(`[AEUMA] arquivos  → ${CAMINHOS.uploads}\n`);

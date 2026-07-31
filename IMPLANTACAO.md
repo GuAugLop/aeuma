@@ -97,7 +97,10 @@ WorkingDirectory=/var/www/aeuma
 ExecStart=/usr/bin/node apps/api/src/servidor.js
 Restart=always
 RestartSec=5
-Environment=NODE_ENV=production
+
+# NÃO declare NODE_ENV aqui. O dotenv não sobrescreve variável que já veio do
+# ambiente, então uma linha "Environment=NODE_ENV=..." tornaria o .env inútil —
+# e trocar o modo no .env não teria efeito nenhum.
 
 # o processo só precisa escrever na pasta de dados
 NoNewPrivileges=true
@@ -255,10 +258,17 @@ sudo systemctl status aeuma          # estado
 
 ## Se algo der errado
 
+Confira o modo em que o serviço está rodando — a primeira linha do log diz:
+
+```bash
+sudo journalctl -u aeuma -n 30 --no-pager | grep "modo"
+```
+
 | Sintoma | Causa provável |
 |---|---|
 | `status=226/NAMESPACE`, serviço em `activating (auto-restart)` | A pasta `data/` não existe — refaça o passo 6 e reinicie |
 | Login aceita a senha e volta para a tela de login | Falta HTTPS (cookie `secure`) |
+| Trocar `NODE_ENV` no `.env` não muda nada | Sobrou `Environment=NODE_ENV=` na unidade systemd — apague a linha |
 | `413 Request Entity Too Large` ao enviar PDF | `client_max_body_size` no nginx |
 | Serviço não sobe, log fala em `JWT_SEGREDO` | Variável ausente no `.env` |
 | `EADDRINUSE` na porta 3000 | Outra instância rodando — `sudo systemctl stop aeuma` |
