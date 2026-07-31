@@ -1,0 +1,14 @@
+node_modules/
+.env
+*.log
+
+# Banco e arquivos enviados pelo painel — conteúdo local, não versionado
+data/db.json
+data/db.json.tmp
+data/.segredo-dev
+data/uploads/**/*
+!data/uploads/**/.gitkeep
+
+# Python
+__pycache__/
+*.pyc

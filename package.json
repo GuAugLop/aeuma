@@ -1,0 +1,21 @@
+{
+  "name": "aeuma",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Monorepo da AEUMA — site institucional, painel administrativo e API.",
+  "workspaces": [
+    "apps/api",
+    "apps/admin",
+    "apps/site"
+  ],
+  "scripts": {
+    "start": "npm start --workspace @aeuma/api",
+    "dev": "npm run dev --workspace @aeuma/api",
+    "criar-admin": "node apps/api/scripts/criar-admin.js",
+    "zerar": "node apps/api/scripts/zerar.js",
+    "gerar-site": "python tools/gerador/build.py"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

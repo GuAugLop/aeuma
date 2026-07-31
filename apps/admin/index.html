@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entrar — Administração AEUMA</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#062A47">
+<link rel="icon" href="/assets/simbolo-aeuma.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/aeuma.css">
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body class="adm-login">
+
+<main class="adm-login__grid">
+  <div class="adm-login__form">
+    <div class="adm-login__box">
+      <a class="brand" href="/" aria-label="Voltar ao site da AEUMA">
+        <svg class="brand__mark" width="42" height="42" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <defs><linearGradient id="lg1" x1="4" y1="2" x2="44" y2="46" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#083A5F"/><stop offset="1" stop-color="#1580C9"/></linearGradient></defs>
+          <rect width="48" height="48" rx="13" fill="url(#lg1)"/>
+          <path d="M13.5 35.5 L22 15.5" stroke="#fff" stroke-width="4.6" stroke-linecap="round"/>
+          <path d="M26 15.5 L34.5 35.5" stroke="#2CC79A" stroke-width="4.6" stroke-linecap="round"/>
+          <path d="M18.6 29.5 H29.4" stroke="#fff" stroke-width="4.6" stroke-linecap="round"/>
+          <circle cx="24" cy="10.6" r="2.9" fill="#2CC79A"/>
+        </svg>
+        <span class="brand__txt">
+          <span class="brand__name">AEUMA</span>
+          <span class="brand__sub">Angatuba · SP</span>
+        </span>
+      </a>
+
+      <span class="eyebrow" style="margin-top:32px;display:block">Área administrativa</span>
+      <h1 class="adm-login__title">Entrar no painel</h1>
+      <p class="lead" style="font-size:.98rem">Publicação dos cálculos mensais e dos documentos do Portal da Transparência.</p>
+
+      <form id="form-login" class="mt-32" novalidate>
+        <label class="adm-label" for="email">E-mail</label>
+        <input class="input adm-input" id="email" name="email" type="email" autocomplete="username"
+               placeholder="admin@aeuma.com" required autofocus>
+
+        <label class="adm-label" for="senha" style="margin-top:18px">Senha</label>
+        <div class="adm-senha">
+          <input class="input adm-input" id="senha" name="senha" type="password"
+                 autocomplete="current-password" placeholder="••••••••" required>
+          <button class="adm-senha__ver" type="button" data-alvo="senha" aria-label="Mostrar senha">Mostrar</button>
+        </div>
+
+        <p class="adm-erro is-hidden" id="erro" role="alert"></p>
+
+        <button class="btn btn--primary btn--lg mt-24" id="botao-entrar" type="submit" style="width:100%">
+          Entrar
+        </button>
+      </form>
+
+      <div class="note note--blue mt-32">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+        <span>Acesso restrito à diretoria e à tesouraria. As páginas públicas do site
+        não exigem login. <a href="/">Voltar ao site</a>.</span>
+      </div>
+    </div>
+  </div>
+
+  <aside class="adm-login__arte">
+    <div class="adm-login__arte-in">
+      <h2>Contas abertas, publicadas por quem faz o trajeto.</h2>
+      <p>Envie aqui os demonstrativos mensais e os documentos do Portal da Transparência.
+      O que for publicado aparece no site na mesma hora.</p>
+      <ul class="adm-lista-arte">
+        <li>Cálculos mensais em PDF, organizados por ano</li>
+        <li>Contratos, prestações de contas, termos e atas</li>
+        <li>Arquivos guardados no próprio servidor da AEUMA</li>
+      </ul>
+    </div>
+  </aside>
+</main>
+
+<script src="/admin/admin.js"></script>
+<script>AEUMA.iniciarLogin();</script>
+</body>
+</html>

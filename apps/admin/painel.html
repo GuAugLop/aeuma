@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel — Administração AEUMA</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#062A47">
+<link rel="icon" href="/assets/simbolo-aeuma.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/aeuma.css">
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body class="adm">
+
+<header class="adm-topo">
+  <div class="adm-topo__in">
+    <a class="brand" href="/" title="Abrir o site público">
+      <svg class="brand__mark" width="38" height="38" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <defs><linearGradient id="lg2" x1="4" y1="2" x2="44" y2="46" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#083A5F"/><stop offset="1" stop-color="#1580C9"/></linearGradient></defs>
+        <rect width="48" height="48" rx="13" fill="url(#lg2)"/>
+        <path d="M13.5 35.5 L22 15.5" stroke="#fff" stroke-width="4.6" stroke-linecap="round"/>
+        <path d="M26 15.5 L34.5 35.5" stroke="#2CC79A" stroke-width="4.6" stroke-linecap="round"/>
+        <path d="M18.6 29.5 H29.4" stroke="#fff" stroke-width="4.6" stroke-linecap="round"/>
+        <circle cx="24" cy="10.6" r="2.9" fill="#2CC79A"/>
+      </svg>
+      <span class="brand__txt">
+        <span class="brand__name">AEUMA</span>
+        <span class="brand__sub">Painel administrativo</span>
+      </span>
+    </a>
+
+    <div class="adm-topo__dir">
+      <a class="btn btn--ghost btn--sm" href="/" target="_blank" rel="noopener">Ver site</a>
+      <span class="adm-usuario" id="usuario-nome"></span>
+      <button class="btn btn--ghost btn--sm" type="button" id="btn-sair">Sair</button>
+    </div>
+  </div>
+
+  <nav class="adm-abas" role="tablist" aria-label="Seções do painel">
+    <div class="adm-abas__in">
+      <button class="adm-aba" type="button" role="tab" data-aba="calculos" aria-selected="true">Cálculos Mensais</button>
+      <button class="adm-aba" type="button" role="tab" data-aba="transparencia" aria-selected="false">Transparência</button>
+      <button class="adm-aba" type="button" role="tab" data-aba="itinerarios" aria-selected="false">Itinerários</button>
+      <button class="adm-aba" type="button" role="tab" data-aba="diretoria" aria-selected="false">Diretoria</button>
+      <button class="adm-aba" type="button" role="tab" data-aba="estatuto" aria-selected="false">Estatuto</button>
+      <button class="adm-aba" type="button" role="tab" data-aba="conta" aria-selected="false">Conta</button>
+    </div>
+  </nav>
+</header>
+
+<div class="adm-aviso is-hidden" id="aviso-senha">
+  <span><b>Você ainda está com a senha padrão.</b> Troque agora, na aba Conta.</span>
+  <button class="btn btn--sm btn--dark" type="button" data-ir="conta">Trocar senha</button>
+</div>
+
+<main class="adm-main" id="main">
+
+  <!-- ===================================================== CÁLCULOS MENSAIS -->
+  <section class="adm-secao" id="secao-calculos" role="tabpanel" aria-label="Cálculos mensais">
+    <div class="adm-cab">
+      <div>
+        <span class="eyebrow">Cálculos Mensais</span>
+        <h1>Demonstrativos mês a mês</h1>
+        <p class="lead">Cada mês publicado aparece na página <a href="/calculos-mensais" target="_blank" rel="noopener">Cálculos Mensais</a> do site.</p>
+      </div>
+      <div class="adm-metricas" id="metricas-calculos"></div>
+    </div>
+
+    <form class="adm-envio card" id="form-calculo" novalidate>
+      <h2 class="adm-envio__titulo">Publicar um cálculo mensal</h2>
+      <div class="adm-campos">
+        <div>
+          <label class="adm-label" for="calc-mes">Mês</label>
+          <select class="input adm-input" id="calc-mes" name="mes" required></select>
+        </div>
+        <div>
+          <label class="adm-label" for="calc-ano">Ano</label>
+          <input class="input adm-input" id="calc-ano" name="ano" type="number" min="2000" max="2100" step="1" required>
+        </div>
+        <div class="adm-campos__largo">
+          <label class="adm-label" for="calc-titulo">Título <span class="adm-opcional">(opcional)</span></label>
+          <input class="input adm-input" id="calc-titulo" name="titulo" type="text" placeholder="Cálculo mensal — Março/2026" maxlength="160">
+        </div>
+      </div>
+
+      <div class="adm-drop" id="drop-calculo" tabindex="0" role="button" aria-controls="calc-arquivo">
+        <input type="file" id="calc-arquivo" name="arquivo" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.png,.jpg,.jpeg" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+        <span class="adm-drop__txt"><b>Arraste o PDF aqui</b> ou clique para escolher</span>
+        <span class="adm-drop__meta">PDF, DOC, XLS, CSV, PNG ou JPG · até 25 MB</span>
+      </div>
+
+      <p class="adm-erro is-hidden" data-erro="calculo" role="alert"></p>
+      <div class="adm-envio__acoes">
+        <button class="btn btn--primary" type="submit">Publicar cálculo</button>
+        <button class="btn btn--ghost" type="reset">Limpar</button>
+      </div>
+    </form>
+
+    <div class="adm-lista-cab">
+      <div class="filters" id="filtros-ano" role="group" aria-label="Filtrar por ano"></div>
+      <div class="field adm-busca">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input class="input" type="search" id="busca-calculos" placeholder="Buscar por mês, ano ou título…" aria-label="Buscar cálculo">
+      </div>
+    </div>
+    <div class="adm-lista" id="lista-calculos" aria-live="polite"></div>
+  </section>
+
+  <!-- ======================================================= TRANSPARÊNCIA -->
+  <section class="adm-secao is-hidden" id="secao-transparencia" role="tabpanel" aria-label="Transparência">
+    <div class="adm-cab">
+      <div>
+        <span class="eyebrow">Portal da Transparência</span>
+        <h1>Contratos, contas, termos e atas</h1>
+        <p class="lead">O que for publicado aqui aparece no <a href="/transparencia" target="_blank" rel="noopener">Portal da Transparência</a>.</p>
+      </div>
+      <div class="adm-metricas" id="metricas-transparencia"></div>
+    </div>
+
+    <form class="adm-envio card" id="form-documento" novalidate>
+      <h2 class="adm-envio__titulo">Publicar um documento</h2>
+      <div class="adm-campos">
+        <div class="adm-campos__largo">
+          <label class="adm-label" for="doc-titulo">Título</label>
+          <input class="input adm-input" id="doc-titulo" name="titulo" type="text" required maxlength="160"
+                 placeholder="Prestação de Contas — Junho/2026">
+        </div>
+        <div>
+          <label class="adm-label" for="doc-categoria">Categoria</label>
+          <select class="input adm-input" id="doc-categoria" name="categoria" required></select>
+        </div>
+        <div class="adm-campos__largo">
+          <label class="adm-label" for="doc-descricao">Descrição <span class="adm-opcional">(opcional)</span></label>
+          <input class="input adm-input" id="doc-descricao" name="descricao" type="text" maxlength="160"
+                 placeholder="Aparece abaixo do título na listagem">
+        </div>
+      </div>
+
+      <div class="adm-drop" id="drop-documento" tabindex="0" role="button" aria-controls="doc-arquivo">
+        <input type="file" id="doc-arquivo" name="arquivo" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.png,.jpg,.jpeg" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+        <span class="adm-drop__txt"><b>Arraste o arquivo aqui</b> ou clique para escolher</span>
+        <span class="adm-drop__meta">PDF, DOC, XLS, CSV, PNG ou JPG · até 25 MB</span>
+      </div>
+
+      <p class="adm-erro is-hidden" data-erro="documento" role="alert"></p>
+      <div class="adm-envio__acoes">
+        <button class="btn btn--primary" type="submit">Publicar documento</button>
+        <button class="btn btn--ghost" type="reset">Limpar</button>
+      </div>
+    </form>
+
+    <div class="adm-lista-cab">
+      <div class="filters" id="filtros-categoria" role="group" aria-label="Filtrar por categoria"></div>
+      <div class="field adm-busca">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input class="input" type="search" id="busca-documentos" placeholder="Buscar por título…" aria-label="Buscar documento">
+      </div>
+    </div>
+    <div class="adm-lista" id="lista-transparencia" aria-live="polite"></div>
+  </section>
+
+  <!-- ========================================================== ITINERÁRIOS -->
+  <section class="adm-secao is-hidden" id="secao-itinerarios" role="tabpanel" aria-label="Itinerários">
+    <div class="adm-cab">
+      <div>
+        <span class="eyebrow">Itinerários</span>
+        <h1>Linhas, destinos e horários</h1>
+        <p class="lead">Alimenta a página <a href="/itinerarios" target="_blank" rel="noopener">Itinerários</a> e os números da <a href="/" target="_blank" rel="noopener">página inicial</a>.</p>
+      </div>
+      <div class="adm-metricas" id="metricas-itinerarios"></div>
+    </div>
+
+    <form class="adm-envio card" id="form-linha" novalidate>
+      <h2 class="adm-envio__titulo">Cadastrar uma linha</h2>
+      <div class="adm-campos adm-campos--3">
+        <div>
+          <label class="adm-label" for="linha-numero">Linha</label>
+          <input class="input adm-input" id="linha-numero" type="text" maxlength="12" placeholder="7A" required>
+        </div>
+        <div>
+          <label class="adm-label" for="linha-destino">Cidade de destino</label>
+          <input class="input adm-input" id="linha-destino" type="text" maxlength="60" placeholder="Itapetininga" required>
+        </div>
+        <div>
+          <label class="adm-label" for="linha-horario">Horário <span class="adm-opcional">(opcional)</span></label>
+          <input class="input adm-input" id="linha-horario" type="text" maxlength="20" placeholder="18:00">
+        </div>
+        <div class="adm-campos__largo">
+          <label class="adm-label" for="linha-instituicoes">Instituições atendidas</label>
+          <input class="input adm-input" id="linha-instituicoes" type="text" placeholder="Fatec, Etec Darcy Pereira, Senac">
+          <p class="adm-dica">Separe por vírgula. Elas viram os filtros e a contagem de instituições do site.</p>
+        </div>
+        <div class="adm-campos__largo">
+          <label class="adm-label" for="linha-coordenacao">Coordenação <span class="adm-opcional">(opcional)</span></label>
+          <input class="input adm-input" id="linha-coordenacao" type="text" maxlength="120" placeholder="Nome dos estudantes responsáveis">
+        </div>
+      </div>
+
+      <p class="adm-erro is-hidden" data-erro="linha" role="alert"></p>
+      <div class="adm-envio__acoes">
+        <button class="btn btn--primary" type="submit">Adicionar linha</button>
+        <button class="btn btn--ghost" type="reset">Limpar</button>
+      </div>
+    </form>
+
+    <div class="adm-lista-cab">
+      <div class="filters" id="filtros-destino" role="group" aria-label="Filtrar por destino"></div>
+      <div class="field adm-busca">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input class="input" type="search" id="busca-linhas" placeholder="Buscar por linha, cidade ou instituição…" aria-label="Buscar linha">
+      </div>
+    </div>
+    <div class="adm-lista" id="lista-itinerarios" aria-live="polite"></div>
+  </section>
+
+  <!-- ============================================================ DIRETORIA -->
+  <section class="adm-secao is-hidden" id="secao-diretoria" role="tabpanel" aria-label="Diretoria">
+    <div class="adm-cab">
+      <div>
+        <span class="eyebrow">Diretoria</span>
+        <h1>Setores e integrantes</h1>
+        <p class="lead">Cada setor vira um bloco na página <a href="/diretoria" target="_blank" rel="noopener">Diretoria</a>, com as pessoas na ordem definida aqui.</p>
+      </div>
+      <div class="adm-metricas" id="metricas-diretoria"></div>
+    </div>
+
+    <form class="adm-envio card" id="form-setor" novalidate>
+      <h2 class="adm-envio__titulo">Criar um setor</h2>
+      <div class="adm-campos">
+        <div>
+          <label class="adm-label" for="setor-titulo">Nome do setor</label>
+          <input class="input adm-input" id="setor-titulo" type="text" maxlength="80" placeholder="Conselho Fiscal" required>
+        </div>
+        <div>
+          <label class="adm-label" for="setor-descricao">Descrição <span class="adm-opcional">(opcional)</span></label>
+          <input class="input adm-input" id="setor-descricao" type="text" maxlength="220" placeholder="O que esse setor faz">
+        </div>
+      </div>
+      <p class="adm-erro is-hidden" data-erro="setor" role="alert"></p>
+      <div class="adm-envio__acoes">
+        <button class="btn btn--primary" type="submit">Criar setor</button>
+        <button class="btn btn--ghost" type="reset">Limpar</button>
+      </div>
+    </form>
+
+    <div class="adm-lista" id="lista-diretoria" aria-live="polite"></div>
+  </section>
+
+  <!-- ============================================================= ESTATUTO -->
+  <section class="adm-secao is-hidden" id="secao-estatuto" role="tabpanel" aria-label="Estatuto">
+    <div class="adm-cab">
+      <div>
+        <span class="eyebrow">Estatuto Social</span>
+        <h1>Documento e capítulos</h1>
+        <p class="lead">Define o PDF e o resumo dos capítulos exibidos na página <a href="/estatuto" target="_blank" rel="noopener">Estatuto</a>.</p>
+      </div>
+      <div class="adm-metricas" id="metricas-estatuto"></div>
+    </div>
+
+    <form class="adm-envio card" id="form-estatuto" novalidate>
+      <h2 class="adm-envio__titulo">O documento</h2>
+      <div class="adm-campos">
+        <div class="adm-campos__largo">
+          <label class="adm-label" for="est-titulo">Título</label>
+          <input class="input adm-input" id="est-titulo" type="text" maxlength="120" required>
+        </div>
+        <div class="adm-campos__largo">
+          <label class="adm-label" for="est-resumo">Resumo <span class="adm-opcional">(opcional)</span></label>
+          <input class="input adm-input" id="est-resumo" type="text" maxlength="400"
+                 placeholder="Frase que aparece ao lado dos botões de download">
+        </div>
+        <div class="adm-campos__largo">
+          <label class="adm-label" for="est-url">Endereço do PDF <span class="adm-opcional">(caso fique hospedado fora)</span></label>
+          <input class="input adm-input" id="est-url" type="url" maxlength="400" placeholder="https://…/estatuto.pdf">
+          <p class="adm-dica">Se você enviar um arquivo abaixo, ele tem prioridade sobre este endereço.</p>
+        </div>
+      </div>
+      <p class="adm-erro is-hidden" data-erro="estatuto" role="alert"></p>
+      <div class="adm-envio__acoes">
+        <button class="btn btn--primary" type="submit">Salvar</button>
+      </div>
+    </form>
+
+    <div class="card adm-envio">
+      <h2 class="adm-envio__titulo">Arquivo do estatuto</h2>
+      <div id="estatuto-arquivo"></div>
+      <div class="adm-drop" id="drop-estatuto" tabindex="0" role="button" aria-controls="est-arquivo">
+        <input type="file" id="est-arquivo" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+        <span class="adm-drop__txt"><b>Arraste o PDF do estatuto</b> ou clique para escolher</span>
+        <span class="adm-drop__meta">PDF, DOC, PNG ou JPG · até 25 MB</span>
+      </div>
+      <p class="adm-erro is-hidden" data-erro="estatuto-arquivo" role="alert"></p>
+      <div class="adm-envio__acoes">
+        <button class="btn btn--primary" type="button" id="btn-enviar-estatuto">Enviar arquivo</button>
+      </div>
+    </div>
+
+    <form class="adm-envio card" id="form-topico" novalidate>
+      <h2 class="adm-envio__titulo">Adicionar capítulo</h2>
+      <div class="adm-campos">
+        <div>
+          <label class="adm-label" for="top-titulo">Título do capítulo</label>
+          <input class="input adm-input" id="top-titulo" type="text" maxlength="120" placeholder="Assembleia Geral" required>
+        </div>
+        <div>
+          <label class="adm-label" for="top-descricao">Descrição <span class="adm-opcional">(opcional)</span></label>
+          <input class="input adm-input" id="top-descricao" type="text" maxlength="400" placeholder="O que o capítulo trata">
+        </div>
+      </div>
+      <p class="adm-erro is-hidden" data-erro="topico" role="alert"></p>
+      <div class="adm-envio__acoes">
+        <button class="btn btn--primary" type="submit">Adicionar capítulo</button>
+        <button class="btn btn--ghost" type="reset">Limpar</button>
+      </div>
+    </form>
+
+    <div class="adm-lista" id="lista-topicos" aria-live="polite"></div>
+  </section>
+
+  <!-- ================================================================ CONTA -->
+  <section class="adm-secao is-hidden" id="secao-conta" role="tabpanel" aria-label="Conta">
+    <div class="adm-cab">
+      <div>
+        <span class="eyebrow">Conta</span>
+        <h1>Dados de acesso</h1>
+        <p class="lead">O painel usa uma conta por pessoa. Novas contas são criadas pelo terminal, com <code>npm run criar-admin</code>.</p>
+      </div>
+    </div>
+
+    <div class="grid g-2">
+      <div class="card">
+        <h3>Sua conta</h3>
+        <dl class="adm-dados" id="dados-conta"></dl>
+      </div>
+
+      <form class="card" id="form-senha" novalidate>
+        <h3>Trocar a senha</h3>
+        <label class="adm-label" for="senha-atual" style="margin-top:16px">Senha atual</label>
+        <input class="input adm-input" id="senha-atual" type="password" autocomplete="current-password" required>
+
+        <label class="adm-label" for="senha-nova" style="margin-top:16px">Nova senha</label>
+        <input class="input adm-input" id="senha-nova" type="password" autocomplete="new-password" minlength="10" required>
+        <p class="muted" style="font-size:.84rem;margin-top:7px">Mínimo de 10 caracteres.</p>
+
+        <label class="adm-label" for="senha-confirma" style="margin-top:16px">Repita a nova senha</label>
+        <input class="input adm-input" id="senha-confirma" type="password" autocomplete="new-password" required>
+
+        <p class="adm-erro is-hidden" data-erro="senha" role="alert"></p>
+        <button class="btn btn--primary mt-24" type="submit">Salvar nova senha</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- ============================================================ MODAL EDIÇÃO -->
+<dialog class="adm-modal" id="modal">
+  <form id="form-edicao" method="dialog">
+    <h2 id="modal-titulo">Editar</h2>
+    <div id="modal-campos"></div>
+    <p class="adm-erro is-hidden" data-erro="modal" role="alert"></p>
+    <div class="adm-modal__acoes">
+      <button class="btn btn--ghost" type="button" data-fechar>Cancelar</button>
+      <button class="btn btn--primary" type="submit">Salvar</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="adm-toasts" id="toasts" aria-live="polite"></div>
+
+<script src="/admin/admin.js"></script>
+<script>AEUMA.iniciarPainel();</script>
+</body>
+</html>

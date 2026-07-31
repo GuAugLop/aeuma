@@ -1,0 +1,9 @@
+{
+  "name": "@aeuma/site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site institucional da AEUMA (HTML gerado por tools/gerador, servido por @aeuma/api).",
+  "scripts": {
+    "build": "python ../../tools/gerador/build.py"
+  }
+}

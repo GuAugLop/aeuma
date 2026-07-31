@@ -1,0 +1,9 @@
+{
+  "name": "@aeuma/admin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Painel administrativo da AEUMA (estático, servido por @aeuma/api em /admin).",
+  "scripts": {
+    "start": "echo \"Servido por @aeuma/api em http://localhost:3000/admin/\""
+  }
+}
