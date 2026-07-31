@@ -316,6 +316,13 @@ def identidade():
         </div>
       </div>''' for nome, hexv, uso, fg in cores)
 
+    reducao = "".join(
+        '<div class="center">'
+        f'<img src="/assets/favicon.svg" width="{t}" height="{t}" alt="Símbolo a {t} pixels">'
+        f'<p class="muted" style="font-size:.78rem;margin-top:8px">{t} px</p>'
+        "</div>"
+        for t in (16, 20, 24, 32, 48, 64, 96))
+
     return pagehead(
         "Identidade visual",
         "O sistema de marca criado no rebranding de 2026: símbolo, cores, tipografia e componentes.",
@@ -325,10 +332,12 @@ def identidade():
 
     <div class="section-head">
       <span class="eyebrow">Símbolo</span>
-      <h2>O “A” de percurso</h2>
-      <p class="lead">O monograma é um <b>A</b> construído como um trajeto: a haste esquerda é a partida,
-      a haste direita — em verde — é a chegada, e o ponto acima marca o destino. A abertura no topo
-      dá a ideia de movimento e de caminho em aberto.</p>
+      <h2>O capelo</h2>
+      <p class="lead">O símbolo mantém o <b>capelo</b> da marca histórica da AEUMA, redesenhado em formas
+      cheias em vez de traço fino — é o que permite reconhecê-lo a 16&nbsp;px, no ícone da aba do navegador.
+      A borla em verde é o único acento de cor: marca a conquista e amarra o símbolo à paleta do site.
+      O <b>diploma</b>, que acompanha o capelo na arte original, entra apenas nas assinaturas grandes,
+      onde há espaço para ele ser lido.</p>
     </div>
 
     <div class="grid g-3">
@@ -339,11 +348,55 @@ def identidade():
         {mark(96,"i2")}<p style="font-size:.86rem;color:#9FBDD6">Sobre fundo escuro</p>
       </div>
       <div class="card center" style="display:grid;place-items:center;gap:16px;padding:40px">
-        <div style="display:flex;align-items:center;gap:12px">{mark(52,"i3")}
-          <span class="brand__txt"><span class="brand__name" style="font-size:1.6rem">AEUMA</span>
-          <span class="brand__sub">Angatuba · SP</span></span></div>
-        <p class="muted" style="font-size:.86rem">Assinatura horizontal</p>
+        <img src="/assets/simbolo-aeuma-mono.svg" width="96" height="96" alt="Capelo e diploma em traço, versão monocromática">
+        <p class="muted" style="font-size:.86rem">Monocromática — capelo e diploma</p>
       </div>
+    </div>
+
+    <div class="section-head mt-40">
+      <span class="eyebrow">Redução</span>
+      <h2>O símbolo em cada tamanho</h2>
+      <p class="lead">O desenho foi verificado nos tamanhos reais de uso: favicon, ícone de aplicativo e
+      cabeçalho. Abaixo do mínimo de 16&nbsp;px a silhueta do capelo deixa de ser reconhecível.</p>
+    </div>
+    <div class="card" style="display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap;padding:32px">{reducao}</div>
+
+    <div class="section-head mt-40" style="margin-top:72px">
+      <span class="eyebrow">Assinaturas</span>
+      <h2>Como a marca é aplicada</h2>
+      <p class="lead">A horizontal é a padrão do site e de documentos. A vertical, com o nome por extenso
+      e o CNPJ, é para ofícios, carimbos e materiais impressos.</p>
+    </div>
+    <div class="grid g-2">
+      <div class="card center" style="display:grid;place-items:center;gap:16px;padding:40px">
+        <img src="/assets/logo-aeuma.svg" width="330" height="64" style="max-width:100%;height:auto" alt="Assinatura horizontal da AEUMA">
+        <p class="muted" style="font-size:.86rem">Horizontal — fundo claro</p>
+      </div>
+      <div class="card center" style="display:grid;place-items:center;gap:16px;padding:40px;background:var(--navy-900);border-color:var(--navy-800)">
+        <img src="/assets/logo-aeuma-branco.svg" width="330" height="64" style="max-width:100%;height:auto" alt="Assinatura horizontal da AEUMA em fundo escuro">
+        <p style="font-size:.86rem;color:#9FBDD6">Horizontal — fundo escuro</p>
+      </div>
+      <div class="card center" style="display:grid;place-items:center;gap:16px;padding:40px">
+        <img src="/assets/logo-aeuma-vertical.svg" width="360" height="300" style="max-width:100%;height:auto" alt="Assinatura vertical da AEUMA com o nome por extenso e o CNPJ">
+        <p class="muted" style="font-size:.86rem">Vertical — documentos e impressos</p>
+      </div>
+      <div class="card center" style="display:grid;place-items:center;gap:16px;padding:40px">
+        <div class="row" style="gap:20px;justify-content:center">
+          <img src="/assets/icone-app-claro.svg" width="76" height="76" alt="Ícone de aplicativo, versão clara">
+          <img src="/assets/icone-app-escuro.svg" width="76" height="76" alt="Ícone de aplicativo, versão escura">
+        </div>
+        <p class="muted" style="font-size:.86rem">Ícones para perfis e aplicativos</p>
+      </div>
+    </div>
+
+    <div class="note note--blue mt-32">{I["shield"]}
+      <span><b>Arquivos da marca:</b>
+      <a href="/assets/logo-aeuma.svg" download>horizontal</a> ·
+      <a href="/assets/logo-aeuma-branco.svg" download>horizontal branca</a> ·
+      <a href="/assets/logo-aeuma-vertical.svg" download>vertical</a> ·
+      <a href="/assets/simbolo-aeuma.svg" download>símbolo</a> ·
+      <a href="/assets/simbolo-aeuma-mono.svg" download>monocromática</a>.
+      Todos em SVG, que não perde qualidade em nenhum tamanho.</span>
     </div>
 
     <div class="section-head mt-40" style="margin-top:72px">
@@ -356,19 +409,24 @@ def identidade():
 
     <div class="section-head" style="margin-top:72px">
       <span class="eyebrow">Tipografia</span>
-      <h2>Plus Jakarta Sans + Inter</h2>
+      <h2>Cinzel + Plus Jakarta Sans + Inter</h2>
+      <p class="lead">Cinzel é reservada ao logotipo — é a serifa que traduz o desenho da marca original.
+      A interface segue em sem-serifa, para não competir com ela.</p>
     </div>
-    <div class="grid g-2">
+    <div class="grid g-3">
+      <div class="card">
+        <p class="muted" style="font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700">Logotipo — Cinzel</p>
+        <p style="font-family:var(--font-logo);font-weight:700;font-size:2.2rem;letter-spacing:.1em;line-height:1.1;margin-top:12px">AEUMA</p>
+        <p class="muted mt-16" style="font-size:.9rem">Só em caixa alta, com espacejamento de .13em. Não usar em texto corrido.</p>
+      </div>
       <div class="card">
         <p class="muted" style="font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700">Títulos — Plus Jakarta Sans</p>
-        <p style="font-family:var(--font-display);font-weight:800;font-size:2.4rem;letter-spacing:-.03em;line-height:1.1;margin-top:12px">Aa Bb Cc</p>
-        <p style="font-family:var(--font-display);font-weight:800;font-size:1.25rem;margin-top:10px">O caminho até a faculdade</p>
+        <p style="font-family:var(--font-display);font-weight:800;font-size:2.2rem;letter-spacing:-.03em;line-height:1.1;margin-top:12px">Aa Bb Cc</p>
         <p class="muted mt-16" style="font-size:.9rem">Pesos 600 · 700 · 800. Entrelinha curta e tracking negativo.</p>
       </div>
       <div class="card">
         <p class="muted" style="font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700">Texto — Inter</p>
-        <p style="font-size:2.4rem;line-height:1.1;margin-top:12px">Aa Bb Cc</p>
-        <p style="margin-top:10px">Transporte universitário organizado por estudantes, para estudantes, com as contas abertas.</p>
+        <p style="font-size:2.2rem;line-height:1.1;margin-top:12px">Aa Bb Cc</p>
         <p class="muted mt-16" style="font-size:.9rem">Pesos 400 · 500 · 600 · 700. Corpo 16px, entrelinha 1.65.</p>
       </div>
     </div>

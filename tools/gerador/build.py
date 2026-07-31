@@ -11,7 +11,8 @@ except Exception:
 
 from theme import CSS
 import shell
-from shell import head, header, footer, LOGO_FULL_SVG, LOGO_WHITE_SVG, FAVICON_SVG
+from shell import (head, header, footer, FAVICON_SVG, ICONE_CLARO_SVG, ICONE_ESCURO_SVG,
+                   LOGO_FULL_SVG, LOGO_VERTICAL_SVG, LOGO_WHITE_SVG, SIMBOLO_MONO_SVG)
 import pages_a as A
 import pages_b as B
 
@@ -58,13 +59,22 @@ def build():
     # folha de estilo isolada (para o dev trocar por <link> se preferir)
     with open(os.path.join(ASSETS, "aeuma.css"), "w", encoding="utf-8") as f:
         f.write(CSS.strip() + "\n")
-    with open(os.path.join(ASSETS, "logo-aeuma.svg"), "w", encoding="utf-8") as f:
-        f.write(LOGO_FULL_SVG)
-    with open(os.path.join(ASSETS, "logo-aeuma-branco.svg"), "w", encoding="utf-8") as f:
-        f.write(LOGO_WHITE_SVG)
-    with open(os.path.join(ASSETS, "simbolo-aeuma.svg"), "w", encoding="utf-8") as f:
-        f.write(FAVICON_SVG.replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" '))
-    print("  ✓ assets/ (css + 3 svg)")
+
+    simbolo = FAVICON_SVG.replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" ')
+    marcas = {
+        "simbolo-aeuma.svg": simbolo,
+        "favicon.svg": simbolo,
+        "logo-aeuma.svg": LOGO_FULL_SVG,
+        "logo-aeuma-branco.svg": LOGO_WHITE_SVG,
+        "logo-aeuma-vertical.svg": LOGO_VERTICAL_SVG,
+        "simbolo-aeuma-mono.svg": SIMBOLO_MONO_SVG,
+        "icone-app-claro.svg": ICONE_CLARO_SVG,
+        "icone-app-escuro.svg": ICONE_ESCURO_SVG,
+    }
+    for nome, conteudo in marcas.items():
+        with open(os.path.join(ASSETS, nome), "w", encoding="utf-8") as f:
+            f.write(conteudo)
+    print(f"  ✓ assets/ (css + {len(marcas)} svg da marca)")
 
 
 if __name__ == "__main__":

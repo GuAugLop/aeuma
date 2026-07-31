@@ -8,39 +8,105 @@ IG = "https://www.instagram.com/aeuma.angatuba/"
 MAIL = "mailto:aeumarequerimento@gmail.com"
 # O PDF do estatuto agora é definido no painel (aba Estatuto) e servido pela API.
 
-# ---------------------------------------------------------------- MARCA
+# ================================================================== MARCA
+# O símbolo é o capelo da logo da AEUMA, redesenhado em formas cheias para
+# sobreviver a 16 px. O diploma que acompanha o capelo na arte original entra
+# só nas assinaturas grandes (vertical e monocromática), onde há espaço.
+
+FONTE_LOGO = "Cinzel, Georgia, 'Times New Roman', serif"
+FONTE_APOIO = "Inter, 'Segoe UI', sans-serif"
+
+# --- capelo, em duas escalas (dentro de uma caixa 48×48) --------------------
+CAPELO = '''<g transform="translate(0 1.2)">
+  <path d="M15.4 20.5v8.6c0 2.6 3.9 4 8.6 4s8.6-1.4 8.6-4v-8.6Z" fill="#BFDCF3"/>
+  <path d="M24 11 40.6 18.2 24 25.4 7.4 18.2Z" fill="#fff"/>
+  <path d="M24 18.2h13.6v8.4" fill="none" stroke="#2CC79A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M37.6 26.2c1.5 0 2.7 1.2 2.7 2.7l-.5 3.4a2.2 2.2 0 0 1-4.4 0l-.5-3.4c0-1.5 1.2-2.7 2.7-2.7Z" fill="#2CC79A"/>
+  <circle cx="24" cy="18.2" r="2" fill="#2CC79A"/>
+</g>'''
+
+# versão para fundo claro sem caixa (traços escuros)
+CAPELO_ESCURO = (CAPELO.replace('fill="#BFDCF3"', 'fill="#B9D8F0"')
+                       .replace('fill="#fff"', 'fill="#0E63A0"')
+                       .replace('stroke="#2CC79A"', 'stroke="#077054"')
+                       .replace('fill="#2CC79A"', 'fill="#077054"'))
+
+
+def gradiente(idp):
+    """Diagonal em objectBoundingBox: acompanha qualquer escala do símbolo."""
+    return (f'<linearGradient id="{idp}g" x1="0" y1="0" x2="1" y2="1">'
+            f'<stop stop-color="#083A5F"/><stop offset="1" stop-color="#1580C9"/></linearGradient>')
+
+
 def mark(size=42, idp="m"):
-    """Símbolo AEUMA: quadrado com o 'A' de percurso (traço direito destacado)."""
+    """Símbolo AEUMA: capelo sobre a caixa azul institucional."""
     return f'''<svg class="brand__mark" width="{size}" height="{size}" style="width:{size}px;height:{size}px;flex:0 0 auto" viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false">
-  <defs>
-    <linearGradient id="{idp}g" x1="4" y1="2" x2="44" y2="46" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#083A5F"/><stop offset="1" stop-color="#1580C9"/>
-    </linearGradient>
-  </defs>
+  <defs>{gradiente(idp)}</defs>
   <rect width="48" height="48" rx="13" fill="url(#{idp}g)"/>
-  <path d="M13.5 35.5 L22 15.5" stroke="#fff" stroke-width="4.6" stroke-linecap="round"/>
-  <path d="M26 15.5 L34.5 35.5" stroke="#2CC79A" stroke-width="4.6" stroke-linecap="round"/>
-  <path d="M18.6 29.5 H29.4" stroke="#fff" stroke-width="4.6" stroke-linecap="round"/>
-  <circle cx="24" cy="10.6" r="2.9" fill="#2CC79A"/>
+  {CAPELO}
 </svg>'''
+
 
 FAVICON_SVG = mark(48, "f").replace('class="brand__mark" ', "")
 
-LOGO_FULL_SVG = f'''<svg xmlns="http://www.w3.org/2000/svg" width="300" height="64" viewBox="0 0 300 64" fill="none">
-  <defs><linearGradient id="lg" x1="4" y1="6" x2="52" y2="58" gradientUnits="userSpaceOnUse">
-    <stop stop-color="#083A5F"/><stop offset="1" stop-color="#1580C9"/></linearGradient></defs>
-  <rect x="6" y="8" width="48" height="48" rx="13" fill="url(#lg)"/>
-  <path d="M19.5 43.5 L28 23.5" stroke="#fff" stroke-width="4.6" stroke-linecap="round"/>
-  <path d="M32 23.5 L40.5 43.5" stroke="#2CC79A" stroke-width="4.6" stroke-linecap="round"/>
-  <path d="M24.6 37.5 H35.4" stroke="#fff" stroke-width="4.6" stroke-linecap="round"/>
-  <circle cx="30" cy="18.6" r="2.9" fill="#2CC79A"/>
-  <text x="70" y="34" font-family="Plus Jakarta Sans, Segoe UI, sans-serif" font-size="27" font-weight="800"
-        letter-spacing="-1.2" fill="#062A47">AEUMA</text>
-  <text x="71" y="48" font-family="Inter, Segoe UI, sans-serif" font-size="8.6" font-weight="600"
-        letter-spacing="1.5" fill="#5A6E80">ESTUDANTES UNIVERSITÁRIOS · ANGATUBA/SP</text>
+# --- assinatura horizontal --------------------------------------------------
+def _lockup_horizontal(cor_nome, cor_sub):
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="330" height="64" viewBox="0 0 330 64" fill="none">
+  <defs>{gradiente("lh")}</defs>
+  <rect x="4" y="8" width="48" height="48" rx="13" fill="url(#lhg)"/>
+  <g transform="translate(4 8)">{CAPELO}</g>
+  <text x="68" y="33" font-family="{FONTE_LOGO}" font-size="25" font-weight="700"
+        letter-spacing="2.6" fill="{cor_nome}">AEUMA</text>
+  <text x="69" y="47" font-family="{FONTE_APOIO}" font-size="8" font-weight="600"
+        letter-spacing="1.7" fill="{cor_sub}">ESTUDANTES UNIVERSITÁRIOS · ANGATUBA/SP</text>
 </svg>'''
 
-LOGO_WHITE_SVG = LOGO_FULL_SVG.replace('fill="#062A47"', 'fill="#FFFFFF"').replace('fill="#5A6E80"', 'fill="#9FBDD6"')
+
+LOGO_FULL_SVG = _lockup_horizontal("#062A47", "#5A6E80")
+LOGO_WHITE_SVG = _lockup_horizontal("#FFFFFF", "#9FBDD6")
+
+# --- assinatura vertical (a mais próxima da arte original) ------------------
+LOGO_VERTICAL_SVG = f'''<svg xmlns="http://www.w3.org/2000/svg" width="360" height="300" viewBox="0 0 360 300" fill="none">
+  <defs>{gradiente("lv")}</defs>
+  <rect x="132" y="10" width="96" height="96" rx="26" fill="url(#lvg)"/>
+  <!-- o capelo é desenhado numa caixa 48×48; o dobro cobre exatamente o quadrado acima -->
+  <g transform="translate(132 10) scale(2)">{CAPELO}</g>
+  <text x="180" y="168" text-anchor="middle" font-family="{FONTE_LOGO}" font-size="46" font-weight="700"
+        letter-spacing="5" fill="#062A47">AEUMA</text>
+  <line x1="150" y1="184" x2="210" y2="184" stroke="#B9D8F0" stroke-width="1.4"/>
+  <text x="180" y="204" text-anchor="middle" font-family="{FONTE_APOIO}" font-size="10.5" font-weight="600"
+        letter-spacing="1.6" fill="#5A6E80">ASSOCIAÇÃO DOS ESTUDANTES UNIVERSITÁRIOS</text>
+  <text x="180" y="222" text-anchor="middle" font-family="{FONTE_APOIO}" font-size="10.5" font-weight="600"
+        letter-spacing="1.6" fill="#5A6E80">DO MUNICÍPIO DE ANGATUBA</text>
+  <text x="180" y="262" text-anchor="middle" font-family="{FONTE_APOIO}" font-size="15" font-weight="700"
+        letter-spacing="1.2" fill="#0E63A0">19.823.447/0001-99</text>
+</svg>'''
+
+# --- versão monocromática: capelo + diploma, traço, como na arte original ---
+SIMBOLO_MONO_SVG = '''<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+  <g stroke="#0B1B29" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M60 16 105 36 60 56 15 36Z"/>
+    <path d="M33 44v20c0 7 12 11 27 11s27-4 27-11V44"/>
+    <path d="M60 36h36v22"/>
+    <path d="M96 58c4 0 7 3 7 7l-1.6 9a5.4 5.4 0 0 1-10.8 0L89 65c0-4 3-7 7-7Z" fill="#0B1B29"/>
+    <circle cx="60" cy="36" r="5" fill="#0B1B29"/>
+    <rect x="18" y="86" width="84" height="22" rx="11"/>
+    <ellipse cx="90" cy="97" rx="6" ry="11"/>
+    <circle cx="90" cy="97" r="2.6"/>
+    <path d="M46 83v28"/><path d="M56 83v28"/>
+  </g>
+</svg>'''
+
+# --- ícones de aplicativo (as duas versões da arte original) ----------------
+ICONE_CLARO_SVG = f'''<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 48 48" fill="none">
+  <rect width="48" height="48" rx="13" fill="#FFFFFF" stroke="#E2E9F0"/>
+  {CAPELO_ESCURO}
+</svg>'''
+
+ICONE_ESCURO_SVG = f'''<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 48 48" fill="none">
+  <circle cx="24" cy="24" r="24" fill="#062A47"/>
+  {CAPELO}
+</svg>'''
 
 # ---------------------------------------------------------------- ÍCONES
 I = {
@@ -78,9 +144,19 @@ NAV = [
 FULL_NAME = "Associação dos Estudantes Universitários do Município de Angatuba — SP"
 
 
+FONTES_GOOGLE = ("https://fonts.googleapis.com/css2"
+                 "?family=Cinzel:wght@600;700"
+                 "&family=Plus+Jakarta+Sans:wght@600;700;800"
+                 "&family=Inter:wght@400;500;600;700&display=swap")
+
+# Marcação de favicon/ícones compartilhada pelo site e pelo painel.
+ICONES_HEAD = '''<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">'''
+
+
 def head(title, desc, current):
-    from urllib.parse import quote
-    fav = quote(" ".join(FAVICON_SVG.split()), safe="")
     return f'''<!doctype html>
 <html lang="pt-BR">
 <head>
@@ -93,10 +169,11 @@ def head(title, desc, current):
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
-<link rel="icon" href="data:image/svg+xml,{fav}">
+<meta property="og:image" content="/assets/og-aeuma.png">
+{ICONES_HEAD}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="{FONTES_GOOGLE}" rel="stylesheet">
 <style>{CSS}</style>
 </head>
 <body>

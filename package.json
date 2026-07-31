@@ -13,7 +13,8 @@
     "dev": "npm run dev --workspace @aeuma/api",
     "criar-admin": "node apps/api/scripts/criar-admin.js",
     "zerar": "node apps/api/scripts/zerar.js",
-    "gerar-site": "python tools/gerador/build.py"
+    "gerar-site": "python tools/gerador/build.py",
+    "gerar-icones": "python tools/gerador/icones.py"
   },
   "engines": {
     "node": ">=20"

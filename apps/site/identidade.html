@@ -10,10 +10,14 @@
 <meta property="og:description" content="Sistema de marca da AEUMA: símbolo, paleta, tipografia e componentes.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20width%3D%2248%22%20height%3D%2248%22%20style%3D%22width%3A48px%3Bheight%3A48px%3Bflex%3A0%200%20auto%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20aria-hidden%3D%22true%22%20focusable%3D%22false%22%3E%20%3Cdefs%3E%20%3ClinearGradient%20id%3D%22fg%22%20x1%3D%224%22%20y1%3D%222%22%20x2%3D%2244%22%20y2%3D%2246%22%20gradientUnits%3D%22userSpaceOnUse%22%3E%20%3Cstop%20stop-color%3D%22%23083A5F%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%231580C9%22%2F%3E%20%3C%2FlinearGradient%3E%20%3C%2Fdefs%3E%20%3Crect%20width%3D%2248%22%20height%3D%2248%22%20rx%3D%2213%22%20fill%3D%22url%28%23fg%29%22%2F%3E%20%3Cpath%20d%3D%22M13.5%2035.5%20L22%2015.5%22%20stroke%3D%22%23fff%22%20stroke-width%3D%224.6%22%20stroke-linecap%3D%22round%22%2F%3E%20%3Cpath%20d%3D%22M26%2015.5%20L34.5%2035.5%22%20stroke%3D%22%232CC79A%22%20stroke-width%3D%224.6%22%20stroke-linecap%3D%22round%22%2F%3E%20%3Cpath%20d%3D%22M18.6%2029.5%20H29.4%22%20stroke%3D%22%23fff%22%20stroke-width%3D%224.6%22%20stroke-linecap%3D%22round%22%2F%3E%20%3Ccircle%20cx%3D%2224%22%20cy%3D%2210.6%22%20r%3D%222.9%22%20fill%3D%22%232CC79A%22%2F%3E%20%3C%2Fsvg%3E">
+<meta property="og:image" content="/assets/og-aeuma.png">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
    AEUMA — Sistema visual 2026
@@ -62,6 +66,7 @@
   --sh-3:0 2px 4px rgba(11,27,41,.05), 0 24px 56px -22px rgba(11,27,41,.32);
 
   /* ---- Tipografia ---- */
+  --font-logo:'Cinzel',Georgia,'Times New Roman',serif;   /* só o logotipo AEUMA */
   --font-display:'Plus Jakarta Sans',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   --font-text:'Inter',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
 
@@ -117,7 +122,7 @@ ul{margin:0;padding:0;list-style:none}
 .brand:hover{text-decoration:none}
 .brand__mark{width:42px;height:42px;flex:0 0 auto}
 .brand__txt{display:flex;flex-direction:column;line-height:1.05}
-.brand__name{font-family:var(--font-display);font-weight:800;font-size:1.32rem;letter-spacing:-.045em;color:var(--navy-900)}
+.brand__name{font-family:var(--font-logo);font-weight:700;font-size:1.22rem;letter-spacing:.13em;color:var(--navy-900)}
 .brand__sub{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
 .nav{margin-left:auto;display:flex;align-items:center;gap:4px}
 .nav a{padding:9px 13px;border-radius:var(--r-pill);color:var(--ink-2);font-weight:500;font-size:.94rem}
@@ -351,16 +356,15 @@ td.t-actions{text-align:right;white-space:nowrap}
   <div class="container header__in">
     <a class="brand" href="/" aria-label="AEUMA — página inicial">
       <svg class="brand__mark" width="42" height="42" style="width:42px;height:42px;flex:0 0 auto" viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false">
-  <defs>
-    <linearGradient id="hg" x1="4" y1="2" x2="44" y2="46" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#083A5F"/><stop offset="1" stop-color="#1580C9"/>
-    </linearGradient>
-  </defs>
+  <defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#083A5F"/><stop offset="1" stop-color="#1580C9"/></linearGradient></defs>
   <rect width="48" height="48" rx="13" fill="url(#hg)"/>
-  <path d="M13.5 35.5 L22 15.5" stroke="#fff" stroke-width="4.6" stroke-linecap="round"/>
-  <path d="M26 15.5 L34.5 35.5" stroke="#2CC79A" stroke-width="4.6" stroke-linecap="round"/>
-  <path d="M18.6 29.5 H29.4" stroke="#fff" stroke-width="4.6" stroke-linecap="round"/>
-  <circle cx="24" cy="10.6" r="2.9" fill="#2CC79A"/>
+  <g transform="translate(0 1.2)">
+  <path d="M15.4 20.5v8.6c0 2.6 3.9 4 8.6 4s8.6-1.4 8.6-4v-8.6Z" fill="#BFDCF3"/>
+  <path d="M24 11 40.6 18.2 24 25.4 7.4 18.2Z" fill="#fff"/>
+  <path d="M24 18.2h13.6v8.4" fill="none" stroke="#2CC79A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M37.6 26.2c1.5 0 2.7 1.2 2.7 2.7l-.5 3.4a2.2 2.2 0 0 1-4.4 0l-.5-3.4c0-1.5 1.2-2.7 2.7-2.7Z" fill="#2CC79A"/>
+  <circle cx="24" cy="18.2" r="2" fill="#2CC79A"/>
+</g>
 </svg>
       <span class="brand__txt">
         <span class="brand__name">AEUMA</span>
@@ -386,58 +390,91 @@ td.t-actions{text-align:right;white-space:nowrap}
 
     <div class="section-head">
       <span class="eyebrow">Símbolo</span>
-      <h2>O “A” de percurso</h2>
-      <p class="lead">O monograma é um <b>A</b> construído como um trajeto: a haste esquerda é a partida,
-      a haste direita — em verde — é a chegada, e o ponto acima marca o destino. A abertura no topo
-      dá a ideia de movimento e de caminho em aberto.</p>
+      <h2>O capelo</h2>
+      <p class="lead">O símbolo mantém o <b>capelo</b> da marca histórica da AEUMA, redesenhado em formas
+      cheias em vez de traço fino — é o que permite reconhecê-lo a 16&nbsp;px, no ícone da aba do navegador.
+      A borla em verde é o único acento de cor: marca a conquista e amarra o símbolo à paleta do site.
+      O <b>diploma</b>, que acompanha o capelo na arte original, entra apenas nas assinaturas grandes,
+      onde há espaço para ele ser lido.</p>
     </div>
 
     <div class="grid g-3">
       <div class="card center" style="display:grid;place-items:center;gap:16px;padding:40px">
         <svg class="brand__mark" width="96" height="96" style="width:96px;height:96px;flex:0 0 auto" viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false">
-  <defs>
-    <linearGradient id="i1g" x1="4" y1="2" x2="44" y2="46" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#083A5F"/><stop offset="1" stop-color="#1580C9"/>
-    </linearGradient>
-  </defs>
+  <defs><linearGradient id="i1g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#083A5F"/><stop offset="1" stop-color="#1580C9"/></linearGradient></defs>
   <rect width="48" height="48" rx="13" fill="url(#i1g)"/>
-  <path d="M13.5 35.5 L22 15.5" stroke="#fff" stroke-width="4.6" stroke-linecap="round"/>
-  <path d="M26 15.5 L34.5 35.5" stroke="#2CC79A" stroke-width="4.6" stroke-linecap="round"/>
-  <path d="M18.6 29.5 H29.4" stroke="#fff" stroke-width="4.6" stroke-linecap="round"/>
-  <circle cx="24" cy="10.6" r="2.9" fill="#2CC79A"/>
+  <g transform="translate(0 1.2)">
+  <path d="M15.4 20.5v8.6c0 2.6 3.9 4 8.6 4s8.6-1.4 8.6-4v-8.6Z" fill="#BFDCF3"/>
+  <path d="M24 11 40.6 18.2 24 25.4 7.4 18.2Z" fill="#fff"/>
+  <path d="M24 18.2h13.6v8.4" fill="none" stroke="#2CC79A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M37.6 26.2c1.5 0 2.7 1.2 2.7 2.7l-.5 3.4a2.2 2.2 0 0 1-4.4 0l-.5-3.4c0-1.5 1.2-2.7 2.7-2.7Z" fill="#2CC79A"/>
+  <circle cx="24" cy="18.2" r="2" fill="#2CC79A"/>
+</g>
 </svg><p class="muted" style="font-size:.86rem">Símbolo — uso principal</p>
       </div>
       <div class="card center" style="display:grid;place-items:center;gap:16px;padding:40px;background:var(--navy-950);border-color:var(--navy-800)">
         <svg class="brand__mark" width="96" height="96" style="width:96px;height:96px;flex:0 0 auto" viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false">
-  <defs>
-    <linearGradient id="i2g" x1="4" y1="2" x2="44" y2="46" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#083A5F"/><stop offset="1" stop-color="#1580C9"/>
-    </linearGradient>
-  </defs>
+  <defs><linearGradient id="i2g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#083A5F"/><stop offset="1" stop-color="#1580C9"/></linearGradient></defs>
   <rect width="48" height="48" rx="13" fill="url(#i2g)"/>
-  <path d="M13.5 35.5 L22 15.5" stroke="#fff" stroke-width="4.6" stroke-linecap="round"/>
-  <path d="M26 15.5 L34.5 35.5" stroke="#2CC79A" stroke-width="4.6" stroke-linecap="round"/>
-  <path d="M18.6 29.5 H29.4" stroke="#fff" stroke-width="4.6" stroke-linecap="round"/>
-  <circle cx="24" cy="10.6" r="2.9" fill="#2CC79A"/>
+  <g transform="translate(0 1.2)">
+  <path d="M15.4 20.5v8.6c0 2.6 3.9 4 8.6 4s8.6-1.4 8.6-4v-8.6Z" fill="#BFDCF3"/>
+  <path d="M24 11 40.6 18.2 24 25.4 7.4 18.2Z" fill="#fff"/>
+  <path d="M24 18.2h13.6v8.4" fill="none" stroke="#2CC79A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M37.6 26.2c1.5 0 2.7 1.2 2.7 2.7l-.5 3.4a2.2 2.2 0 0 1-4.4 0l-.5-3.4c0-1.5 1.2-2.7 2.7-2.7Z" fill="#2CC79A"/>
+  <circle cx="24" cy="18.2" r="2" fill="#2CC79A"/>
+</g>
 </svg><p style="font-size:.86rem;color:#9FBDD6">Sobre fundo escuro</p>
       </div>
       <div class="card center" style="display:grid;place-items:center;gap:16px;padding:40px">
-        <div style="display:flex;align-items:center;gap:12px"><svg class="brand__mark" width="52" height="52" style="width:52px;height:52px;flex:0 0 auto" viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false">
-  <defs>
-    <linearGradient id="i3g" x1="4" y1="2" x2="44" y2="46" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#083A5F"/><stop offset="1" stop-color="#1580C9"/>
-    </linearGradient>
-  </defs>
-  <rect width="48" height="48" rx="13" fill="url(#i3g)"/>
-  <path d="M13.5 35.5 L22 15.5" stroke="#fff" stroke-width="4.6" stroke-linecap="round"/>
-  <path d="M26 15.5 L34.5 35.5" stroke="#2CC79A" stroke-width="4.6" stroke-linecap="round"/>
-  <path d="M18.6 29.5 H29.4" stroke="#fff" stroke-width="4.6" stroke-linecap="round"/>
-  <circle cx="24" cy="10.6" r="2.9" fill="#2CC79A"/>
-</svg>
-          <span class="brand__txt"><span class="brand__name" style="font-size:1.6rem">AEUMA</span>
-          <span class="brand__sub">Angatuba · SP</span></span></div>
-        <p class="muted" style="font-size:.86rem">Assinatura horizontal</p>
+        <img src="/assets/simbolo-aeuma-mono.svg" width="96" height="96" alt="Capelo e diploma em traço, versão monocromática">
+        <p class="muted" style="font-size:.86rem">Monocromática — capelo e diploma</p>
       </div>
+    </div>
+
+    <div class="section-head mt-40">
+      <span class="eyebrow">Redução</span>
+      <h2>O símbolo em cada tamanho</h2>
+      <p class="lead">O desenho foi verificado nos tamanhos reais de uso: favicon, ícone de aplicativo e
+      cabeçalho. Abaixo do mínimo de 16&nbsp;px a silhueta do capelo deixa de ser reconhecível.</p>
+    </div>
+    <div class="card" style="display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap;padding:32px"><div class="center"><img src="/assets/favicon.svg" width="16" height="16" alt="Símbolo a 16 pixels"><p class="muted" style="font-size:.78rem;margin-top:8px">16 px</p></div><div class="center"><img src="/assets/favicon.svg" width="20" height="20" alt="Símbolo a 20 pixels"><p class="muted" style="font-size:.78rem;margin-top:8px">20 px</p></div><div class="center"><img src="/assets/favicon.svg" width="24" height="24" alt="Símbolo a 24 pixels"><p class="muted" style="font-size:.78rem;margin-top:8px">24 px</p></div><div class="center"><img src="/assets/favicon.svg" width="32" height="32" alt="Símbolo a 32 pixels"><p class="muted" style="font-size:.78rem;margin-top:8px">32 px</p></div><div class="center"><img src="/assets/favicon.svg" width="48" height="48" alt="Símbolo a 48 pixels"><p class="muted" style="font-size:.78rem;margin-top:8px">48 px</p></div><div class="center"><img src="/assets/favicon.svg" width="64" height="64" alt="Símbolo a 64 pixels"><p class="muted" style="font-size:.78rem;margin-top:8px">64 px</p></div><div class="center"><img src="/assets/favicon.svg" width="96" height="96" alt="Símbolo a 96 pixels"><p class="muted" style="font-size:.78rem;margin-top:8px">96 px</p></div></div>
+
+    <div class="section-head mt-40" style="margin-top:72px">
+      <span class="eyebrow">Assinaturas</span>
+      <h2>Como a marca é aplicada</h2>
+      <p class="lead">A horizontal é a padrão do site e de documentos. A vertical, com o nome por extenso
+      e o CNPJ, é para ofícios, carimbos e materiais impressos.</p>
+    </div>
+    <div class="grid g-2">
+      <div class="card center" style="display:grid;place-items:center;gap:16px;padding:40px">
+        <img src="/assets/logo-aeuma.svg" width="330" height="64" style="max-width:100%;height:auto" alt="Assinatura horizontal da AEUMA">
+        <p class="muted" style="font-size:.86rem">Horizontal — fundo claro</p>
+      </div>
+      <div class="card center" style="display:grid;place-items:center;gap:16px;padding:40px;background:var(--navy-900);border-color:var(--navy-800)">
+        <img src="/assets/logo-aeuma-branco.svg" width="330" height="64" style="max-width:100%;height:auto" alt="Assinatura horizontal da AEUMA em fundo escuro">
+        <p style="font-size:.86rem;color:#9FBDD6">Horizontal — fundo escuro</p>
+      </div>
+      <div class="card center" style="display:grid;place-items:center;gap:16px;padding:40px">
+        <img src="/assets/logo-aeuma-vertical.svg" width="360" height="300" style="max-width:100%;height:auto" alt="Assinatura vertical da AEUMA com o nome por extenso e o CNPJ">
+        <p class="muted" style="font-size:.86rem">Vertical — documentos e impressos</p>
+      </div>
+      <div class="card center" style="display:grid;place-items:center;gap:16px;padding:40px">
+        <div class="row" style="gap:20px;justify-content:center">
+          <img src="/assets/icone-app-claro.svg" width="76" height="76" alt="Ícone de aplicativo, versão clara">
+          <img src="/assets/icone-app-escuro.svg" width="76" height="76" alt="Ícone de aplicativo, versão escura">
+        </div>
+        <p class="muted" style="font-size:.86rem">Ícones para perfis e aplicativos</p>
+      </div>
+    </div>
+
+    <div class="note note--blue mt-32"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+      <span><b>Arquivos da marca:</b>
+      <a href="/assets/logo-aeuma.svg" download>horizontal</a> ·
+      <a href="/assets/logo-aeuma-branco.svg" download>horizontal branca</a> ·
+      <a href="/assets/logo-aeuma-vertical.svg" download>vertical</a> ·
+      <a href="/assets/simbolo-aeuma.svg" download>símbolo</a> ·
+      <a href="/assets/simbolo-aeuma-mono.svg" download>monocromática</a>.
+      Todos em SVG, que não perde qualidade em nenhum tamanho.</span>
     </div>
 
     <div class="section-head mt-40" style="margin-top:72px">
@@ -558,19 +595,24 @@ td.t-actions{text-align:right;white-space:nowrap}
 
     <div class="section-head" style="margin-top:72px">
       <span class="eyebrow">Tipografia</span>
-      <h2>Plus Jakarta Sans + Inter</h2>
+      <h2>Cinzel + Plus Jakarta Sans + Inter</h2>
+      <p class="lead">Cinzel é reservada ao logotipo — é a serifa que traduz o desenho da marca original.
+      A interface segue em sem-serifa, para não competir com ela.</p>
     </div>
-    <div class="grid g-2">
+    <div class="grid g-3">
+      <div class="card">
+        <p class="muted" style="font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700">Logotipo — Cinzel</p>
+        <p style="font-family:var(--font-logo);font-weight:700;font-size:2.2rem;letter-spacing:.1em;line-height:1.1;margin-top:12px">AEUMA</p>
+        <p class="muted mt-16" style="font-size:.9rem">Só em caixa alta, com espacejamento de .13em. Não usar em texto corrido.</p>
+      </div>
       <div class="card">
         <p class="muted" style="font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700">Títulos — Plus Jakarta Sans</p>
-        <p style="font-family:var(--font-display);font-weight:800;font-size:2.4rem;letter-spacing:-.03em;line-height:1.1;margin-top:12px">Aa Bb Cc</p>
-        <p style="font-family:var(--font-display);font-weight:800;font-size:1.25rem;margin-top:10px">O caminho até a faculdade</p>
+        <p style="font-family:var(--font-display);font-weight:800;font-size:2.2rem;letter-spacing:-.03em;line-height:1.1;margin-top:12px">Aa Bb Cc</p>
         <p class="muted mt-16" style="font-size:.9rem">Pesos 600 · 700 · 800. Entrelinha curta e tracking negativo.</p>
       </div>
       <div class="card">
         <p class="muted" style="font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700">Texto — Inter</p>
-        <p style="font-size:2.4rem;line-height:1.1;margin-top:12px">Aa Bb Cc</p>
-        <p style="margin-top:10px">Transporte universitário organizado por estudantes, para estudantes, com as contas abertas.</p>
+        <p style="font-size:2.2rem;line-height:1.1;margin-top:12px">Aa Bb Cc</p>
         <p class="muted mt-16" style="font-size:.9rem">Pesos 400 · 500 · 600 · 700. Corpo 16px, entrelinha 1.65.</p>
       </div>
     </div>
@@ -605,16 +647,15 @@ td.t-actions{text-align:right;white-space:nowrap}
       <div class="footer__brand">
         <a class="brand" href="/">
           <svg class="brand__mark" width="42" height="42" style="width:42px;height:42px;flex:0 0 auto" viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false">
-  <defs>
-    <linearGradient id="fog" x1="4" y1="2" x2="44" y2="46" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#083A5F"/><stop offset="1" stop-color="#1580C9"/>
-    </linearGradient>
-  </defs>
+  <defs><linearGradient id="fog" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#083A5F"/><stop offset="1" stop-color="#1580C9"/></linearGradient></defs>
   <rect width="48" height="48" rx="13" fill="url(#fog)"/>
-  <path d="M13.5 35.5 L22 15.5" stroke="#fff" stroke-width="4.6" stroke-linecap="round"/>
-  <path d="M26 15.5 L34.5 35.5" stroke="#2CC79A" stroke-width="4.6" stroke-linecap="round"/>
-  <path d="M18.6 29.5 H29.4" stroke="#fff" stroke-width="4.6" stroke-linecap="round"/>
-  <circle cx="24" cy="10.6" r="2.9" fill="#2CC79A"/>
+  <g transform="translate(0 1.2)">
+  <path d="M15.4 20.5v8.6c0 2.6 3.9 4 8.6 4s8.6-1.4 8.6-4v-8.6Z" fill="#BFDCF3"/>
+  <path d="M24 11 40.6 18.2 24 25.4 7.4 18.2Z" fill="#fff"/>
+  <path d="M24 18.2h13.6v8.4" fill="none" stroke="#2CC79A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M37.6 26.2c1.5 0 2.7 1.2 2.7 2.7l-.5 3.4a2.2 2.2 0 0 1-4.4 0l-.5-3.4c0-1.5 1.2-2.7 2.7-2.7Z" fill="#2CC79A"/>
+  <circle cx="24" cy="18.2" r="2" fill="#2CC79A"/>
+</g>
 </svg>
           <span class="brand__txt"><span class="brand__name">AEUMA</span><span class="brand__sub">Angatuba · SP</span></span>
         </a>

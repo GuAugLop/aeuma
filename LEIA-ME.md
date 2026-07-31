@@ -61,6 +61,7 @@ aeuma-rebranding/
 | `npm start` | Sobe o servidor (site + painel + API) |
 | `npm run dev` | Igual, com reinício automático a cada alteração |
 | `npm run gerar-site` | Regera o HTML de `apps/site/` a partir de `tools/gerador/` |
+| `npm run gerar-icones` | Regera os PNG da marca (favicon, ícones de app, imagem social) |
 | `npm run criar-admin -- --email x@y.com --nome "Nome"` | Cria uma conta (senha aleatória impressa) |
 | `npm run criar-admin -- --email x@y.com --senha "..."` | Cria com senha definida, ou redefine a de quem já existe |
 | `npm run criar-admin -- --listar` | Lista as contas cadastradas |
@@ -217,6 +218,9 @@ workspaces npm e um único comando para subir tudo.
 antigos. O HTML continua sendo gerado como `itinerarios.html` em `apps/site/` — quem faz a
 tradução é o servidor.
 
+**Marca nova.** O símbolo passou a ser o capelo da logo da AEUMA (antes era um "A" desenhado
+como trajeto), com favicon, ícones de aplicativo, manifesto e imagem de compartilhamento.
+
 > Consequência: **Início, Itinerários, Diretoria, Cálculos Mensais, Transparência e
 > Estatuto** agora dependem do servidor — carregam os dados pela API. Só `/identidade`
 > continua sendo HTML puro. Quando a API não responde, cada página mostra um aviso no lugar
@@ -235,7 +239,8 @@ npm run gerar-site
 | Arquivo | Conteúdo |
 |---|---|
 | `theme.py` | Tokens de cor, tipografia e toda a folha de estilo |
-| `shell.py` | Marca, `<head>`, cabeçalho, rodapé e ícones |
+| `shell.py` | Marca (todos os SVG), `<head>`, cabeçalho, rodapé e ícones |
+| `icones.py` | Rasteriza os PNG da marca a partir dos SVG de `shell.py` |
 | `jsutil.py` | Trechos de JavaScript compartilhados pelas páginas que leem a API |
 | `data.py` | Só as categorias da transparência (o resto migrou para o banco) |
 | `pages_a.py` | Início, Itinerários, Diretoria |
@@ -252,14 +257,38 @@ As categorias da transparência aparecem em dois lugares e precisam continuar ig
 
 ## Identidade visual
 
-**Marca.** O símbolo é um "A" construído como um trajeto — haste esquerda (partida), haste
-direita em verde (chegada) e um ponto no topo (destino). Arquivos em `apps/site/assets/`.
+**Marca.** O símbolo é o **capelo** da logo histórica da AEUMA, redesenhado em formas cheias
+(no lugar do traço fino) para continuar legível a 16 px, no ícone da aba. A borla em verde é o
+único acento de cor. O **diploma**, que acompanha o capelo na arte original, aparece nas
+assinaturas grandes e na versão monocromática — em tamanho de favicon ele vira ruído.
+
+O logotipo "AEUMA" usa **Cinzel**, serifa inscricional próxima da usada na arte original.
+
+Arquivos em `apps/site/assets/`:
+
+| Arquivo | Uso |
+|---|---|
+| `simbolo-aeuma.svg` · `favicon.svg` | Símbolo isolado (mesmo desenho) |
+| `logo-aeuma.svg` · `logo-aeuma-branco.svg` | Assinatura horizontal, fundo claro e escuro |
+| `logo-aeuma-vertical.svg` | Assinatura vertical com nome por extenso e CNPJ |
+| `simbolo-aeuma-mono.svg` | Capelo + diploma em traço preto, para impressos |
+| `icone-app-claro.svg` · `icone-app-escuro.svg` | Perfis de redes e aplicativos |
+| `favicon-16/32/48.png`, `apple-touch-icon.png`, `icone-192/512.png` | Favicon e ícones de app |
+| `og-aeuma.png` | Prévia ao compartilhar links (1200×630) |
+
+Os PNG são gerados a partir dos SVG com o Chrome em modo headless — rode só quando a marca
+mudar:
+
+```bash
+npm run gerar-icones
+```
 
 **Cores.** Azul institucional (`#0E63A0` primária, `#062A47` escuro) + verde percurso
 (`#077054` / `#0FAE81`) + âmbar para avisos. Todas as combinações de texto usadas passam no
 critério **AA da WCAG**.
 
-**Tipografia.** Plus Jakarta Sans (títulos) + Inter (texto), com fallback do sistema.
+**Tipografia.** Cinzel (só o logotipo) + Plus Jakarta Sans (títulos) + Inter (texto), com
+fallback do sistema.
 
 **Acessibilidade.** Link "pular para o conteúdo", `aria-current` na navegação, `aria-pressed`
 nos filtros, `aria-live` nos contadores, foco visível, respeito a `prefers-reduced-motion`
