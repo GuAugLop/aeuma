@@ -250,6 +250,9 @@ def footer():
       <span>© 2026 AEUMA — Associação dos Estudantes Universitários do Município de Angatuba/SP</span>
       <span>CNPJ 19.823.447/0001-99 · <a href="/identidade">Identidade visual</a> · <a href="/admin/">Administração</a></span>
     </div>
+    <p class="footer__credito">Desenvolvido por
+      <a href="mailto:gulopes.augusto@gmail.com">Gustavo Augusto Lopes</a> e
+      <a href="mailto:jpaul.o@icloud.com">João Paulo Policarpo Barbosa</a></p>
   </div>
 </footer>
 ''' + BURGER_JS

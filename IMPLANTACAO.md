@@ -157,7 +157,7 @@ sudo nano /etc/nginx/sites-available/aeuma
 ```nginx
 server {
     listen 80;
-    server_name aeuma.com.br www.aeuma.com.br;
+    server_name aeuma.com www.aeuma.com;
 
     # OBRIGATÓRIO: o padrão do nginx é 1 MB e derrubaria os envios de PDF
     client_max_body_size 30M;
@@ -185,7 +185,7 @@ sudo nginx -t && sudo systemctl reload nginx
 
 ```bash
 sudo apt install -y certbot python3-certbot-nginx
-sudo certbot --nginx -d aeuma.com.br -d www.aeuma.com.br
+sudo certbot --nginx -d aeuma.com -d www.aeuma.com
 ```
 
 > **Sem HTTPS o login do painel não funciona.** Em produção o cookie de sessão é marcado como
