@@ -251,8 +251,8 @@ def footer():
       <span>CNPJ 19.823.447/0001-99 · <a href="/identidade">Identidade visual</a> · <a href="/admin/">Administração</a></span>
     </div>
     <p class="footer__credito">Desenvolvido por
-      <a href="mailto:gulopes.augusto@gmail.com">Gustavo Augusto Lopes</a> e
-      <a href="mailto:jpaul.o@icloud.com">João Paulo Policarpo Barbosa</a></p>
+      <a href="https://www.linkedin.com/in/gustavo-lopes-a56ab816b/" target="_blank" rel="noopener">Gustavo Augusto Lopes</a> e
+      <a href="https://www.linkedin.com/in/jppolicarpob/" target="_blank" rel="noopener">João Paulo Policarpo Barbosa</a></p>
   </div>
 </footer>
 ''' + BURGER_JS
